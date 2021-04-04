@@ -1,0 +1,1025 @@
+#  (廣東話, Cantonese) [簡單黎講 C++]
+
+簡單黎講 C++ - Houdini Basic
+廣東話 C++ 教學系列 https://www.youtube.com/channel/UCWW9g_90Ik1U8ULNG5PvoYQ
+
+facebook page
+https://www.facebook.com/%E7%B0%A1%E5%96%AE%E9%BB%8E%E8%AC%9B-C-Plus-Plus-319894615140227
+
+歡迎留言 詢問問題
+
+Example Houdini Project:
+	https://github.com/SimpleTalkCpp/SimpleTalkCpp_Tutorial/tree/master/Graphic/Houdini/Houdini%20Basic
+
+tags:
+	Houdini, 廣東話 Houdini 教學, 簡單黎講 C++, VEX, HScript
+
+=== Houdini Basic ===
+- Basic UI
+	- Pane
+		- Scene View
+		- Network View
+		- Change Pane
+		- Split Pane
+		- Remove Pane
+		- Swap pane
+
+	- Viewport	
+		- View (Hotkey: Space Bar)			
+		- Frame Selected (Hotkey: Space + F)
+		- Frame All
+		- Hold Space / Click Space
+		
+	- Select Tool
+		- Select Edge Loop (Double Click Edge)
+		- Select From/To (Hold A)
+				
+	- Move / Rotate / Scale Tool
+		- World Sapce / Object Space (Hotkey: M)
+		- Snap Grid (Hold Ctrl + Drag)
+		- Tool/ Object Pivot (Hotkey: ', Hotkey: ")
+		
+	- Paramater
+		- Default
+			- Reset to Default
+			- Set Default
+			- Reset Factory Default
+			
+		- MMB sliding
+
+- Poly Model
+	- Create Simple Charactor
+	- Parent / Child
+		- Solaris System (Sun / Earth / Moon)
+		
+	- Display Options
+		- display Point / Normal
+		- Wireframe
+		- HQ OpenGL
+	
+	- Poly Modelling
+		- Extrude (with path)
+		- Subdiv
+		- Smooth
+		- Transform
+		- Merge
+		- Edit Node
+		- Bend / Squish / Twist
+							
+- Poly Model 2
+	- Primitive
+		- Box
+		- Sphere
+		- Tube
+		- Font
+		- File
+		- Control (1 point)
+		
+	- Deform
+		- Mountain
+		- Scuplt
+		- Ray
+		
+	- Boolean Node
+	- Metaball
+	- PolyWire
+	
+	- Curve
+		- Draw
+			- Project on Geo
+		- Curve Node
+		- Revolve
+	
+	- Poly Bridge
+		- from same Sphere (disable auto direction)
+		- Alone curve
+		
+- Attribute	
+	- Spreadsheet		
+	- Display options > Guides
+		- Scale normal
+		- Point Size
+		- Font Size
+	
+	- Add Node
+		- Add Point
+		- Add Primitive
+		
+	- Attribute
+		- Point Node
+			- Add Color (Cd - Color Diffuse)
+				- Random
+				- Add to Primitive (only works if Point doesn't have Cd)			
+			- Add Normal
+
+	- Copy To Point
+		- Point from Grid
+		- Point from Curve
+			- Curve Normal from PolyFrame Node
+			- Curve Normal from "Point" Node
+
+	- Group
+		- Group By Range
+		- Group Promote
+			
+	- Pipe Example
+
+==============
+- Display Curve Hull
+
+- Assign Shader
+	- PBR
+	
+- Texture Mapping	
+	- UV Project
+	- UV Quick Shade
+	- UV Edit
+		- Display UV overlap, Back face
+		- Select UV Connected
+	- UV Fuse
+	- UV Brush
+	- UV Transform (Animation)
+		- Waterfall
+	- Attr Noise (Additive)
+	- UV Flatten
+		- select edge
+	- UV Layout
+	
+==============
+save texture UV to image
+
+- SOP Geometry (Shape)
+- CHOP (Channel)
+- SHOP (Shader)
+- POP (Particle)
+- DOP (Dynamic)
+- ROP (Render)
+- COP (Compositing)
+
+- Paramater Expression
+	- HScript Expression
+		- case sensitive
+		- http://www.sidefx.com/docs/houdini/ref/expression_cookbook.html
+		- http://www.sidefx.com/docs/houdini/network/expressions.html#globals
+		
+	- +-*/ %
+	- ^, sqrt
+	- $F, $FF, $FSTART, $FEND, $FPS
+	- $T, $TSTART, $TEND	
+	- Ctrl + E - Expression Editor
+		- print("my_label:", $F)	
+		- add to channel list
+	- min, max, clamp
+	- if(expression, true_value, false_value)
+	
+	- sin, cos, tan
+	- deg / rad
+		- degree - Returns the degree a specified face or hull.
+	- abs
+		- abs(sin($F * 5) * 10)
+		
+	- floor, ceil, round, trunc,
+	- fit
+
+	- pulse(value, start, end)
+		- pulse(sin($F), 0, 1)	
+	
+	- rand(seed)
+		- noise(X, Y, Z)
+
+	- Point - old Node
+		- sin(@P.x)		
+			
+	- Open Popup ParamaterPane
+		- Drag Channel
+		- ch()
+		- ch( chs("pickNode") + "/tx" )
+		- add Null node for ref
+	
+	- Custom Paramater
+		- Data Type
+			- int / float / bool
+			- color
+			- string
+			- vector2 / vector3 / vector4
+			- vecor <-- N dim
+			- matrix			
+	
+		- Drag from node
+		- Edit Paramater Interface (Add)
+		- Param Folder
+		
+		- Button
+			- Callback Script: `print("Hello", 1 + 3)`
+		
+		- Disable When: 
+			- {testToggle 0}  <-- bool
+			- {testFloat < 2} <-- float
+			- {testToggle 0} { testFloat > 2 }
+		- Driven Key
+			- chramp("testRamp", ch("tx") / 10 , 0) <-- 1 for colorG
+
+	- Subnet
+			
+	- String
+		- Font Node
+		- $JOB
+		- `1 + 2` <-- add back quote
+		- `10 + $F`
+		- String Paramater does not eval (cannot set expression language)
+			- require set 1 keyframe
+		
+		- substr
+			- substr("The quick brown fox jumps over the lazy dog", 0, ch("test"))
+		- random color per char
+			- add text attribute
+	
+	- SOP
+		- npoints / npointsgroup
+			- npoints("../box1")
+			- npoints(opinputpath(".", 0))
+			
+		- nprims / nprimsgroup
+		- point(surface_node, point_number, attribute, index)
+			- snap to point
+			- point("../box1", 2, "P", 2)			
+		- normal(surface_node, prim_num, u, v, index)
+	
+===========================			
+- VOP
+	- Point - Old Node
+
+	- Ex801
+		- P -> Cd
+			- fit (-5, 5, 0, 1)
+			
+		- P -> P
+			- Vector to Float -> Float to Vector
+				- Swizzle
+				- Constant set Y
+				- Sine Y  (rad)
+				- Distance -> Sine
+				- MulConstant for Distance
+				- Mul and add param
+					- update param is faster (no need compile VEX again)
+				- Promote Param (MMB)
+				- Time connect to mul
+
+	- Ex002
+		- Periodic Noise
+			- 4D -> 3D Vector to Vector4				
+		- ptnum -> Bind Export new param "TestOut"
+		- Bind (Input)		
+	
+	- Ex003
+		- Mix Second Input
+			- import point
+		
+	- Ex004
+		- getAttrib for aim point
+		- Normal by LookAt		
+		
+	- Ex005
+		- Print String
+		
+	- Ex006
+		- Append Array 
+		- For Loop
+		
+	- Ex007	
+		- Add Point (per Point or Detail)
+		- For Loop
+			
+=====================================
+- Timeshift, For Loop, Stamp, Visualize
+	- TimeShift
+		- Trail by Merge Timeshift
+	- Trail
+	- Trail by Merge + For Loop
+		- Sub-network
+	- Re-time	
+		
+	- Copy Stamp
+		- Line + n-gon
+		- VOP add attribute (don't put stamp() inside, please add param)
+		- re-time
+
+	- Solver
+		- move point without POP
+		- Velocity, force by VOP
+		- Visualize
+		
+=======================
+- Obj Node Transformation
+	- Gimbal Lock
+	- Keep transformation when parent
+	- Child Compensation
+	- Pre Transform
+
+- Set Project
+	- $JOB
+	
+- Animation Curve
+	- Tangent
+		- Hold Ctrl Keep angle
+
+	- (T) Tie / Untie
+		- On Tangent
+		- ON Value
+	- (B) Reset Default	
+	- Constant / Straight / Bezier
+	
+	- Insert Key (Atl+LMB)
+	
+	- (Y) Box Handle
+	- (E) Snap Nearest Frame
+
+	- Snapshot
+		- (Enter) Snapshot
+		- (Shift + X) Swap
+
+	- Menu > Channels > Sample Value / Paste Sampled Value
+		
+	- Dope Sheet
+		
+	- Display
+		- Animation Range
+		- Control Value / Tangent
+		- Create Channel Group
+		- Pin Channel in Editor
+		- Menu > View > Show Selected
+		- Menu > View > Vertical Adpat (V)
+		- Multi-Graph	
+		
+===================================		
+- Chop Network, Constraint, Audio
+	- Create
+		- Wave
+		- Noise
+	
+	- Shape
+		- Limit
+		- Filter
+		- Lag
+		- Spline
+		- Spring
+	
+	- Output
+		- chop("../chop/node/chan")
+			- add Null node
+			
+		- Channel Node (Bind to Parameter)
+			- box1:ty  (relative to CHOP Network, not Channel Node)
+			- channel name
+				- t[xyz]
+				- blend[3-7:2]
+				- * ?
+
+		- Export to Parameter
+		
+		- Update Order
+			- Animation Curve -> Chop -> Export (MotionFX)
+		
+		- Animation Editor Menu > View > Draw Chop export
+		
+	- Sample Rate
+		- Display Point (Press D)
+		
+	- Multiple Channels	
+		- Merge (by Name)
+		- Delete 
+		- local varaible e.g. $C
+			- http://www.sidefx.com/docs/houdini/network/expressions.html		
+	
+	- Comp
+		- Math
+			- Combine Channels (All Channels from one Merged CHOP)
+			- Combine CHOPS (Combines Channels together)
+		- Mul
+	
+	- Channel VOP
+	
+	- Time
+		- Delay
+		- Cycle
+		- Extend
+		- Interpolate
+		
+	- Create MotionFx from Paramater
+		- Noise
+		- Constant - ch("tx")
+		- Export - color		
+			
+	- Obj Transformation Constraint
+		- Obj Enable Constraint
+		- GetWorldPos
+		- Point Constraint
+			- Switch between 2 points
+			- Constraint Simple Blend
+		- Pre-Transform Node
+		- LookAt
+		- Parent Constraint
+		- Follow Path
+		- Transform VOP
+			
+	- Deform Geometry by Channels
+		- Geo Input	
+		- Geo Output SOP Channel
+		- static (sample per point)
+		- animation (channel per point)
+	
+
+		
+	- Audio
+		- File Input
+		- Editor Audio Out Settings
+			- Scrub
+		- Resample !!
+		- Audio In
+		- Filter
+			
+	- Input Device
+		- Keyboard
+		- Mouse
+		- GamePad
+		
+			
+======================================
+- Animatio Rigging
+	- Bone		
+		- Bone Length
+		- Rotate Angle Range
+		- Lock Rotate X, Z
+		
+	- Bone Tool		
+		- Chain Name
+		- Mouse Scroll for div
+		- (Ctrl-LMB) Split Bone
+		- (Shift-LMB) Add Bone 
+		- (Ctrl+MMB) Select Parent Bone
+		
+	- Create Bones from Curve
+								
+	- Capture Geo
+		- Capture Biharmonic
+			- Align Capture Pose
+			- Paint Capture Layer
+			- Menu > Edit > Objects > IK Reset Pose
+			
+		- Capture Proximity
+		- Capture Regions
+			- Edit Capture Regions
+			- Edit Capture Weights			
+		
+	- IK		
+		- With Twist Affector		
+		- IK / FK blending
+
+	- Null Node
+		- Icon (Cube, Circle, Custom SOP)
+	
+	- Mirror Bones
+		- Bone name must have prefix L_
+	
+========================	
+
+- Render View			
+	- Top Toolbar
+		- RenderNode Param
+		- Camera Param
+		- Auto Update
+		- Preview (Disable Preview for Final Render Quality)		
+		
+	- Right Bar 
+		- Magnify
+		
+	- View Area
+		- Show Pixel Detail (Ctrl + LMB)
+		- Show Material Param on Pixel (Ctrl + Shift + LMB)
+		- Shift LMB Drag for Render Area
+			- Shift-click outside the image to clear the region
+		- Right Click Menu > Inspect
+			
+	- Bottom Bar 1
+		- See RGBA Channels
+		- Brightness / Contract
+		- Gamma
+		
+	- Bottom Bar 2
+		- Snapshot (Enter)
+		- Prev / Next Snapshot (Key: [,])
+		- Zoom Button -, +
+
+- Create Camera
+	- Focal Length
+	- Near / Far Clip
+	- Tie View To Camera/Light
+	- Background image
+	- Set Resolution (from present)
+	
+- Add Light	
+	- Ambient Light
+	- Spot Light
+		- Look Through Light from Viewport
+		- Shadow Type (No Shadow)
+	- Point Light
+	- Directional Light
+	- Area Light
+	- Geo Light
+	- Env Light (Image Base Lighting)
+	- Portal Light
+	- Sky Light
+		- Use Time Data and Location
+		- Render Light Geometry (if want to see the Sky)
+	- Caustic Light
+	- Light Linker Pane
+	
+- SOP Normal
+	- Per Point / Vertex
+	- Cusp Angle
+			
+//============================			
+- RenderView	
+	- View Area
+		- Show Pixel Detail (Ctrl + LMB)
+		- Show Material Param on Pixel (Ctrl + Shift + LMB)
+		- Shift LMB Drag for Render Area
+			- Shift-click outside the image to clear the region
+		- Right Click Menu > Inspect
+		
+- Mantra
+	- Override Camera resolution
+	- Render to MPlay
+	- Render to Disk
+		- filename.$F4.png
+		- Check File Path - Menu > Render > Pre-flight
+	- Render to Disk in BG (can close Houdini)
+	- Frame Range
+	- Network Render
+		Driver > Command
+	- Extra Image Plane
+		- Depth buffer
+		- check passes from Render View
+		- Add More Custom Pass
+	- Force Render Particular Object
+		- Disable Render All
+	- Sample Per Pixel 3x3 -> 6x6 -> 9x9
+		- Check Houdini Doc for detail
+	- Sampling Quality from Light Node (To improve Shadow Noise)
+	- Motion Blur
+
+- Take List
+		
+- Material Panel
+	- Toolbar
+		- Regenerate Shader Ball Icon (Refresh Button)
+		- Select (Select Scene Object for current Material)
+		- Assign (Assign Material to Selected Scene Object)
+		
+	- Principled Shader	
+		- Preset from Parameter options (Gear Icon)
+		- Metallic
+		- Roughness
+		- Reflection
+		- Transparents
+		- SSS
+		- Emission
+		- Normal map
+		- Displacement
+		
+	- Principled Shader Core
+
+	- Constant Shader
+	
+	- Material Builder (VOP)
+		- Drag VOP Node to Geometry or preview
+		- Menu > Edit > Collapse Selected into Material 
+	
+	- Layer Mix Node
+	
+	- PBR
+		- https://www.allegorithmic.com/pbr-guide
+
+=========================================================
+
+- Principled Shader	
+	- Preset from Parameter options (Gear Icon)
+	- Material Icon
+
+- nVidia De-noiser
+
+- Menu > Render > Scheduler
+
+- ROP
+	- OpenGL Node		
+	- Mantra (PBR)
+	- RenderMan
+	- Node by Node
+	- Geo File Output
+	- FBX File Output
+	- Alembic File Output
+	- Image File Output
+	- Chop File Output
+	- Particle Cache
+	- Renderer Output	
+
+- Compositing
+	- COP
+	- Set Canvas Size
+		- Menu > Edit > Composite Project Settings
+		
+	- Matte
+		- Color
+		- Ramp
+		- Font
+		- Shape
+		- Geo
+
+	- Work with 3D Rendered Images
+		- DOF
+			- De-Focus <-- Mask M
+			- Artifacts Due to Depth Discontinuities
+			- Blur Mask
+			 
+			 
+		- Bloom 
+		- ToneMap / LUT
+		
+- Bake Texture
+	- Example
+		- Create Rubber Toy
+			- Attribute Delete > Prim (shop_materialpath)
+		- Create Low Poly Geo
+			- Object Merge From Rubber Toy)
+			- Poly Reduce 10%
+		
+	- Tangent Space Normal Map
+	- Unwarpping Tab
+		- Ray Bias
+		
+======================
+- VEX part 1
+	- ; is needed
+	- +-*/%
+	- Attr Wrangle
+	- Local Varaible
+	- +=, -=, *=, /=, %=
+	- | & ^
+		
+	- Comments
+		
+	- auto add param to UI by VEX source
+		int     i  = chi("i");
+		float   f  = chf("f");
+		vector  v  = chv("v");
+			- v[0]
+			- xyzw, rgba
+		vector2 u  = chu("u");
+			- xy, uv
+		vector4 p  = chp("p");
+		matrix2 m2 = ch2("m2");
+		matrix3 m3 = ch3("m3");
+		matrix  m4 = ch4("m4");
+			- xx <-- [0][0]
+		string  s  = chs("s");	
+
+	- Attr
+		- vector @attr <-- same as v@attr		
+		- @P.y += 1;
+		
+		- 	float tmp = @P.x;
+			@P.x = @P.y;
+			@P.y = tmp;
+			
+		- @P = @P.yxz;
+		- @P = set(1, a, 0);  | @P = {1, a, 0} only work for constant
+
+===========================
+- VEX part 2	
+	@Time - Float time ($T)
+	@Frame - Float frame ($FF)
+	@SimTime - Float simulation time ($ST), only present in DOP contexts.
+	@SimFrame - Float simulation frame ($SF), only present in DOP contexts.
+	@TimeInc - Float time step (1/$FPS)
+	
+	@elemnum / @ptnum
+	@numelem / @numpt
+	
+	- Point Node VEX Demo
+
+	- floor, ceil
+	- min, max, clamp, fit
+	
+	- define function
+				
+	- if-else
+	- ==, <, <=, !=, ||, &&
+	- 
+	
+=================================
+- VEX part 3
+	- float = int + float
+		- 1, 1.0
+		
+	- div in int/float, e.g. 5 / 2 vs 5.0 / 2
+		
+	- vector = vector * float
+	
+	- variable naming, Keyword
+	
+	- string
+		- string = string + string
+		- find, re_replace("[ab]", "$", str);
+		- printf(), sprintf()
+		- warning(), error()
+
+	- Array	
+		- sprintf() convert array to string		
+		- append, push, pop
+		- resize, len, isvalidindex
+		- min
+		- sort
+		- reverse
+		- insert, removeindex, removevalue
+
+	- addpoint
+	- addprim
+		
+=================================
+- VEX part 4		
+	- array append
+
+	- while	
+		- total, average, find_min
+	
+	- do-while
+	- for-loop	
+
+	- geometry functions
+		- @opinput1_P 
+			- copy normal
+			- lerp (blendshape)
+			
+		- point(1, "P", @ptnum)
+		- attrib(1, "point", "P", @ptnum)
+		
+		- getattrib(1, "point", "P", @ptnum, ok);
+		- pointattrib(1, "P", @ptnum, ok);
+		
+		- hasattrib
+		- attribclass
+
+============================
+- Particle - part 1
+	- Pop Network
+		
+	- Pop Source
+		- from First / Second Input
+		- from SOP
+		- Scatter from Surface
+			- density
+		- Birth Impulse / Const
+		
+		- @id is unique
+		- @age / @life / @dead
+		
+		- Emit from Normal Direction
+		- Extrude Box
+				
+	- Copy to Point
+		- Pack and Instance
+				
+	- Force	
+		- Pop Force
+			- Visualize
+				- Trail
+				- marker v, force
+			
+			- Show Guide
+			- Noise
+						
+		- Pop Group						
+		- Pop Fan Cone		
+		- Pop Wind
+			- Use VEX
+		
+		- Pop Axis Force
+			- Orbit / Lift / Suction
+		- Pop Curve Force
+		- Pop Drag		
+		- Pop Attract
+
+===============================
+- Particle - part 2
+	- Pop Attract
+		- Curve (Surface Point + U param)
+		- Keyframe (Disable popsolver)
+		- add Pop Drag to close by target point
+		
+		- Particle Follow Particle
+			- Point Group
+			- Match Method = Point Per Particle
+				- Particle ID = "id % 10"
+
+	- Display
+		- Guides
+			- Show Time
+			- Particle gnomon
+			- Scale Normal
+			
+		- Geometry > Particles 
+			- Point Size
+			- Disc Size
+
+	- Trail Node
+		- Compute Velocity
+								
+	- Pop Flock
+		- https://www.red3d.com/cwr/boids/
+		- Constant Speed
+			@v = normalize(@v) * chf("speed");
+			
+		- on 2D plane
+			@force.y = 0;
+			@v.y = 0;
+		
+									
+	- Collision Detect
+		- Gravity Node
+	
+		- Ground Plane
+			- Merge Node (order does matter)
+			- Ground Bounce = 1			
+			- Pop Object
+				- Bounce
+				- Bounce Forward
+				
+			- Pop Property				
+				
+		- Static Object Node		
+			- Use Default (Volume)
+			- Use Surface Collision						
+			- Obj Path
+				- Collide with Moving Static Object (Plane)
+				
+		- Friction
+				
+		- Pop Solver
+			- Response
+				- Stop / Stick (Moving Object)
+			- Move To Hit
+			
+			- Sleeping
+				
+		- Terrain Object Node
+		
+						
+	- Pop Replicate
+		- Group 
+			- @hitnum>0
+			- from Pop Solver CreateCollideGroup
+			
+		- Birth Impulse
+		- Kill Original Particle
+		- Shape Point + Variance Velocity
+					
+			
+==========================
+Particle - part3 rendering		
+	- Delete Static Object
+		- Delete Node
+			- by Expression @id<0
+			
+	- DOP I/O
+		- DOP Network
+		- DOP Node = PopObject
+		- Field > Import + 1
+		
+	- Pop Instance
+		- add SOP Node "Instance"
+		- add SOP Node Material
+			- Material "Use Packed Color"
+			
+		- @pscale = @age / @life;
+		- @pscale = @nage;
+
+	- Pop Sprite
+		- Pop Wrangle
+			@pscale = 0.5;
+			i@texIndex = (int)(@age * $FPS);
+			f@Alpha = chramp("alphaRamp", @nage);			
+			
+		- Use VEX
+			- Texture
+				- textureindex = @texIndex;
+			- Alpha
+				- alpha = @Alpha;
+				
+	- Sprite Material
+		- Material Builder
+		- Sprite Procedural
+			- Attribute = Cd Alpha
+	
+	- Render Motion Blur
+	
+	- Metaball
+		- Copy To Point
+		- Don't use "Pack and Instance"
+	
+	- Particle Fluid Surface
+		
+============================
+Rigid Body Dynamic
+	- DOP Network
+	- Rigid Body Solver
+	- RDB Object
+		- Density (Compute Mass)
+		- Mass
+		- Center of Mass
+		- Bounce
+		- Rotation Stiffness
+		- Friction
+		- Dynamic Friction Scale
+		
+	- SOP DopImport
+		- DOP Network
+			- add Null Node
+			- `opinputpath("/obj/box1/dopimport1/", 0)`
+		- Single Object
+		
+	- Spreadsheet
+		- Affector Matrix
+		
+	- Pop Solver + Rigid Body Dynamic
+		
+	- Copy to Point
+	- Assemble Node
+		- Create Packed Geometry	
+
+	- RBD Packed Object
+		- Bullet Data
+			- Show Guide
+			- Geometry Representation = "demo" Concave		
+
+	- Break Node
+	- Voronoi Fracture
+		- IsoOffset > Scatter > Voronoi
+	- ExplodedView
+		
+===============================
+Rigid Body Dynamic - part 2		
+		
+	- Constraint Network
+		- Create Line SOP
+			- Points = 5
+		
+		- ConvertLine - restlength	
+		
+		- Create Constraintt Network
+			- SOP Path = Line		
+				
+		- Primitive Wrangle 
+			- s@constraint_name = "ConRelHard";
+			- f@strength = 1;
+		- Point Wrangle
+			- s@name = sprintf("rbdobject%d", @elemnum);
+			
+		- Hard Constraint Relationship
+		- s@constraint_type = "position" or "rotation";
+		
+		- Spring Constraint
+		- Glue Constraint
+			- f@strength = 4;
+			
+	- Newton's cradle
+					
+============================	
+	
+- Heightfield
+
+- L-System
+
+- Volume Dynamic
+
+- Nurbs Modelling
+
+- FLIP Fluids
+
+- Vellum
+
+===========================
+- Shop (OLD)
+	- Surface Shader Builder
+	- Principled Shader	
+
+======================================			
+- Python
+	- Shell
+	- Expression
+		- Single line in Expression
+		- Multi-line in function need "return" value
+	- Python Object Node
+		
+	
+		
+	
